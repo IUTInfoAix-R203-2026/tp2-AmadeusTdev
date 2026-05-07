@@ -44,6 +44,59 @@ public class GrilleDemineur {
   public GrilleDemineur(List<String> grilleInitiale) {
     // TODO exercice 5 : valider l'entrée puis stocker la grille.
     this.grille = grilleInitiale == null ? List.of() : List.copyOf(grilleInitiale);
+
+    if (grille == null) {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  private char compterMinesAdjacentes(int line, int column) {
+    int amntMines = 0;
+
+    // Left
+    if ((column - 1 >= 0) && grille.get(line).toCharArray()[column - 1] == '*') {
+      amntMines += 1;
+    }
+    // Right
+    if ((column + 1 < grille.get(line).toCharArray().length)
+        && grille.get(line).toCharArray()[column + 1] == '*') {
+      amntMines += 1;
+    }
+    // Top
+    if ((line - 1 >= 0) && grille.get(line - 1).toCharArray()[column] == '*') {
+      amntMines += 1;
+    }
+    // Bottom
+    if ((line + 1 < grille.size()) && grille.get(line + 1).toCharArray()[column] == '*') {
+      amntMines += 1;
+    }
+
+    // Top-Left
+    if ((line - 1 >= 0 && column - 1 >= 0)
+        && grille.get(line - 1).toCharArray()[column - 1] == '*') {
+      amntMines += 1;
+    }
+    // Top-Right
+    if ((line - 1 >= 0 && column + 1 < grille.get(line).toCharArray().length)
+        && grille.get(line - 1).toCharArray()[column + 1] == '*') {
+      amntMines += 1;
+    }
+    // Bottom-Left
+    if ((line + 1 < grille.size() && column - 1 >= 0)
+        && grille.get(line + 1).toCharArray()[column - 1] == '*') {
+      amntMines += 1;
+    }
+    // Bottom-Right
+    if ((line + 1 < grille.size() && column + 1 < grille.get(line).toCharArray().length)
+        && grille.get(line + 1).toCharArray()[column + 1] == '*') {
+      amntMines += 1;
+    }
+
+    if (amntMines == 0) {
+      return ' ';
+    } else {
+      return String.valueOf(amntMines).charAt(0);
+    }
   }
 
   /**
@@ -55,11 +108,34 @@ public class GrilleDemineur {
     // TODO exercice 5 : remplir resultat avec une ligne annotée par ligne d'entrée.
     //
     // Pour chaque case (ligne, col) :
-    //   - si c'est une mine ('*'), laisser '*'
-    //   - sinon compter les mines dans les 8 cases voisines (en gérant les bords)
-    //   - si le compte est > 0, écrire ce chiffre
-    //   - si le compte est 0, écrire un espace
+    // - si c'est une mine ('*'), laisser '*'
+    // - sinon compter les mines dans les 8 cases voisines (en gérant les bords)
+    // - si le compte est > 0, écrire ce chiffre
+    // - si le compte est 0, écrire un espace
     //
+
+    if (grille == null) {
+      throw new IllegalArgumentException();
+    }
+
+    for (int ligne = 0; ligne < grille.size(); ligne++) {
+      char[] ligneChar = grille.get(ligne).toCharArray();
+      char[] resulatLigne = new char[ligneChar.length];
+
+      for (int column = 0; column < ligneChar.length; column++) {
+        if (ligneChar[column] == '*') {
+          // Ajout à la ligne
+          resulatLigne[column] = '*';
+        } else {
+          // Ajout à la ligne
+          resulatLigne[column] = compterMinesAdjacentes(ligne, column);
+        }
+      }
+
+      // Ajout au tableau
+      resultat.add(ligne, new String(resulatLigne));
+    }
+
     // Astuce : une méthode privée compterMinesAdjacentes(int, int) facilite
     // la gestion des bords et rend le code testable.
     return resultat;
