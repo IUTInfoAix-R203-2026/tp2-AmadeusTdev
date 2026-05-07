@@ -29,28 +29,24 @@ class GrilleDemineurTest {
 
   // ========= Cas dégénérés =========
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_vide_est_correctement_annotee() {
     assertThat(new GrilleDemineur(Collections.emptyList()).getRepresentationAnnotee())
         .isEqualTo(Collections.emptyList());
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_1_x_1_sans_mine_est_correctement_annotee() {
     List<String> entree = Collections.singletonList(" ");
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(entree);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_1_x_1_avec_mine_est_correctement_annotee() {
     List<String> entree = Collections.singletonList("*");
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(entree);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_1_x_2_avec_mine_et_case_vide_est_correctement_annotee() {
     List<String> entree = Collections.singletonList(" *");
@@ -58,14 +54,12 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_sans_mine_est_correctement_annotee() {
     List<String> entree = Arrays.asList("   ", "   ", "   ");
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(entree);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_pleine_de_mines_est_correctement_annotee() {
     List<String> entree = Arrays.asList("***", "***", "***");
@@ -74,7 +68,6 @@ class GrilleDemineurTest {
 
   // ========= Mine dans un coin (test des bornes) =========
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_une_mine_dans_le_coin_haut_gauche_est_correctement_annotee() {
     List<String> entree = Arrays.asList("*  ", "   ", "   ");
@@ -82,7 +75,6 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_une_mine_dans_le_coin_bas_droit_est_correctement_annotee() {
     List<String> entree = Arrays.asList("   ", "   ", "  *");
@@ -90,7 +82,6 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_une_mine_unique_au_centre_est_correctement_annotee() {
     List<String> entree = Arrays.asList("   ", " * ", "   ");
@@ -98,7 +89,6 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_mines_sur_le_pourtour_est_correctement_annotee() {
     List<String> entree = Arrays.asList("***", "* *", "***");
@@ -106,7 +96,6 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_d_une_seule_ligne_avec_deux_mines_est_correctement_annotee() {
     List<String> entree = Collections.singletonList(" * * ");
@@ -114,7 +103,6 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_d_une_seule_colonne_avec_deux_mines_est_correctement_annotee() {
     List<String> entree = Arrays.asList(" ", "*", " ", "*", " ");
@@ -122,7 +110,6 @@ class GrilleDemineurTest {
     assertThat(new GrilleDemineur(entree).getRepresentationAnnotee()).isEqualTo(attendue);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_mines_en_croix_est_correctement_annotee() {
     List<String> entree = Arrays.asList("  *  ", "  *  ", "*****", "  *  ", "  *  ");
