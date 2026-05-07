@@ -42,6 +42,60 @@ public class ConvertisseurDeNombreRomain {
     // retournant 1 en dur), puis "II" = 2 et "III" = 3 (boucle de comptage
     // d'occurrences de I), puis "V" = 5 (switch sur le symbole).
     //
+
+    // Listes des symboles et valeurs
+    char[] charList = {'I', 'V', 'X', 'L', 'C', 'D', 'M'};
+    int[] valeurList = {1, 5, 10, 50, 100, 500, 1000};
+
+    // On boucle pour chaque lettres
+    char[] chiffres = chiffreRomain.toCharArray();
+    for (int i = 0; i < chiffreRomain.length(); i++) {
+      // Calcule de la valeur du symbole
+      int currentChar = chiffres[i];
+      int val = 0;
+
+      for (int pos = 0; pos < charList.length; pos++) {
+        if (charList[pos] == currentChar) {
+          val = valeurList[pos];
+        }
+      }
+
+      // Valeur négative
+      if (i + 1 < chiffreRomain.length()) {
+        char nextChar = chiffres[i + 1];
+        int nextVal = 0;
+
+        // Calcule de la valeur du symbole
+        for (int pos = 0; pos < charList.length; pos++) {
+          if (charList[pos] == nextChar) {
+            nextVal = valeurList[pos];
+          }
+        }
+
+        // Chiffre inexistant
+        if (val == 0) {
+          throw new IllegalArgumentException();
+        }
+        // Negatif
+        if (val < nextVal) {
+          if ((currentChar == 'I' && (nextChar == 'V' || nextChar == 'X'))
+              || (currentChar == 'X' && (nextChar == 'L' || nextChar == 'C'))
+              || (currentChar == 'C' && (nextChar == 'D' || nextChar == 'M'))) {
+            val = -val;
+          } else {
+            // Combinaison invalide
+            throw new IllegalArgumentException();
+          }
+        }
+      }
+      // Chiffre inexistant
+      if (val == 0) {
+        throw new IllegalArgumentException();
+      }
+
+      // Ajout
+      total += val;
+    }
     // Quand vous arrivez à "IV" = 4 : extrayez une méthode valeurDe(char)
     // pour factoriser, puis ajoutez la logique de soustraction.
     //
