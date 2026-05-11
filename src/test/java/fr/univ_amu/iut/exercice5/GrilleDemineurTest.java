@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.approvaltests.Approvals;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -119,20 +118,17 @@ class GrilleDemineurTest {
 
   // ========= Validation d'entrée =========
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_null_leve_exception() {
     assertThatThrownBy(() -> new GrilleDemineur(null)).isInstanceOf(IllegalArgumentException.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_symbole_inconnu_leve_exception() {
     assertThatThrownBy(() -> new GrilleDemineur(Collections.singletonList(" * & ")))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grille_avec_lignes_de_tailles_differentes_leve_exception() {
     assertThatThrownBy(() -> new GrilleDemineur(Arrays.asList("*", "**", "* *", "*  *", "*   *")))
@@ -148,7 +144,6 @@ class GrilleDemineurTest {
    * classe de test. La première fois, on exécute, on vérifie visuellement le fichier {@code
    * .received.txt} produit, et on le renomme en {@code .approved.txt} pour figer le comportement.
    */
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_grande_grille_est_correctement_annotee() {
     List<String> entree = Arrays.asList(" *  * ", "  *   ", "    * ", "   * *", " *  * ", "      ");
