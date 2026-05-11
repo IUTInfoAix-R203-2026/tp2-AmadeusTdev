@@ -45,8 +45,27 @@ public class GrilleDemineur {
     // TODO exercice 5 : valider l'entrée puis stocker la grille.
     this.grille = grilleInitiale == null ? List.of() : List.copyOf(grilleInitiale);
 
-    if (grille == null) {
+    if (grilleInitiale == null) {
       throw new IllegalArgumentException();
+    }
+
+    // Check all symbols
+    int previousLength = 0;
+    for (int line = 0; line < grille.size(); line++) {
+      char[] str = grille.get(line).toCharArray();
+      // Check unknown symbols
+      for (int column = 0; column < str.length; column++) {
+        if (str[column] != '*' && str[column] != ' ') {
+          throw new IllegalArgumentException();
+        }
+      }
+      // Check different lengths
+      if (previousLength != 0) {
+        if (previousLength != str.length) {
+          throw new IllegalArgumentException();
+        }
+      }
+      previousLength = str.length;
     }
   }
 
